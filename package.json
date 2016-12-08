@@ -1,6 +1,6 @@
 {
   "name": "bloc-jams-angular",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Starter project for the Bloc Frontend Web Development",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "author": "Bloc Inc",
   "license": "ISC",
   "dependencies": {
-    "hapi": "~7.5.0",
+    "hapi": "^7.5.3",
     "path": "^0.4.9"
   },
   "devDependencies": {
