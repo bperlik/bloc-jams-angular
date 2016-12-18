@@ -113,25 +113,25 @@
 			}
 		};
 		
-		/**
-		* @function -SongPlayer.next
-		* @desc -plays the next song after the one currently playing, or stops if at the end of the track list
-		*/
-		SongPlayer.next = function() {
-			var currentSongIndex = getSongIndex(SongPlayer.currentSong);
-			currentSongIndex++;
+		 /**
+		 * @function -SongPlayer.next
+		 * @desc -plays the next song after the one currently playing, or stops if at the end  of the track list
+		 */
+		 SongPlayer.next = function() {
+			 var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+			 currentSongIndex++;
 			
-			if (currentSongIndex >= currentAlbum.songs.length) {
-				stopSong(SongPlayer.currentSong);
-			} else {
-				var song = currentAlbum.songs[currentSongIndex];
-				setSong(song);
-				playSong(song);
-			}
-		};
+			 if (currentSongIndex >= currentAlbum.songs.length) {
+				 stopSong(SongPlayer.currentSong);
+			 } else {
+				 var song = currentAlbum.songs[currentSongIndex];
+				 setSong(song);
+				 playSong(song);
+			 }
+		 };
 		
-		return SongPlayer;
-	}
+		 return SongPlayer;
+	 }
 	
 	angular
 		.module('blocJams')
