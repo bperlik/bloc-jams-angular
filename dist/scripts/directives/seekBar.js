@@ -41,9 +41,13 @@
 					return percent + "%";
 				};
 
-				scope.fillStyle = function () {
+				scope.fillStyle = function() {
 					return {
 						width: percentString()
+					};
+				};
+				scope.thumbStyle = function() {
+					return {left: percentString()
 					};
 				};
 
@@ -57,10 +61,10 @@
 
 				// @function - scope.trackThumb
 				// @desc - moves percent when user drags seek bar thumb tab
-				scope.trackThumb = function () {
+				scope.trackThumb = function() {
 					$document.bind('mousemove.thumb', function (event) {
 						var percent = calculatePercent(seekBar, event);
-						scope.$apply(function () {
+						scope.$apply(function() {
 							scope.value = percent * scope.max;
 						});
 					});
