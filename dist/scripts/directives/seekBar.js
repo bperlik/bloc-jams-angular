@@ -27,12 +27,22 @@
 			templateUrl: '/templates/directives/seek_bar.html',
 			replace: true,
 			restrict: 'E',
-			scope: {},
+			scope: {
+				onChange: '&'
+			}, // & binding to allow execution in parent scope
 			link: function (scope, element, attributes) {
 				scope.value = 0;
 				scope.max = 100;
 
 				var seekBar = $(element);
+
+				attributes.$observe('value', function (newValue) {
+					scope.value = newValue;
+				});
+
+				attributes.$observe('max', function (newValue) {
+					scope.max = newValue;
+				});
 
 				var percentString = function () {
 					var value = scope.value;
@@ -41,13 +51,14 @@
 					return percent + "%";
 				};
 
-				scope.fillStyle = function() {
+				scope.fillStyle = function () {
 					return {
 						width: percentString()
 					};
 				};
-				scope.thumbStyle = function() {
-					return {left: percentString()
+				scope.thumbStyle = function () {
+					return {
+						left: percentString()
 					};
 				};
 
@@ -57,15 +68,17 @@
 				scope.onClickSeekBar = function (event) {
 					var percent = calculatePercent(seekBar, event);
 					scope.value = percent * scope.max;
+					notifyOnChange(scope.value);
 				};
 
 				// @function - scope.trackThumb
 				// @desc - moves percent when user drags seek bar thumb tab
-				scope.trackThumb = function() {
+				scope.trackThumb = function () {
 					$document.bind('mousemove.thumb', function (event) {
 						var percent = calculatePercent(seekBar, event);
-						scope.$apply(function() {
+						scope.$apply(function () {
 							scope.value = percent * scope.max;
+							notifyOnChange(scope.value);
 						});
 					});
 
@@ -74,6 +87,19 @@
 						$document.unbind('mouseup.thumb');
 					});
 				};
+
+				//*
+				// @function - scope.notifyOnChange
+				// @desc - checks that attribute passed in is a function, calls that function
+				//
+				var notifyOnChange = function (newValue) {
+					if (typeof scope.onChange === 'function') {
+						scope.onChange({
+							value: newValue
+						});
+					}
+				};
+
 			}
 		};
 	}
