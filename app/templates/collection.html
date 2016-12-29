@@ -7,7 +7,7 @@
 					<a class="album-name" ui-sref="album">{{ album.title }}</a>
 					<br/>
 					<a ui-sref="album">{{ album.artist }}</a>
-					<br/> {{ album.songs.length }} songs
+					<br/> {{ album.songs.duration | timecode }} songs
 					<br/>
 				</p>
 			</div>
